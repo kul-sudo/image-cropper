@@ -1,6 +1,7 @@
 import express from 'express'
 import sharp from 'sharp'
 import got from 'got'
+import { v4 } from 'uuid'
 
 const PORT = 3000
 
@@ -15,6 +16,11 @@ app.get('/api', (req, res) => {
   res.setHeader('Content-Type', 'text/html')
   res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate')
   res.end(`Hello! Go to item: <a href="${path}">${path}</a>`)
+})
+
+app.get('/api/item/:slug', (req, res) => {
+  const { slug } = req.params
+  res.end(`Item: ${slug}`)
 })
 
 app.get("/:width/:height/:url(*)", async (req, res) => {
