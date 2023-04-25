@@ -1,7 +1,7 @@
 import express from 'express'
 import sharp from 'sharp'
 import got from 'got'
-import { join, resolve } from 'path'
+import { resolve } from 'path'
 
 const PORT = 3000
 const dirname = resolve()
@@ -12,8 +12,10 @@ app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`)
 })
 
+app.use(express.static('public'))
+
 app.get('/', (req, res) => {
-  res.sendFile(resolve(dirname, 'static', 'index.html'))
+  res.sendFile('index.html', { root: path.join(dirname, 'public') })
 })
 
 app.get("/:width/:height/:url(*)", async (req, res) => {
