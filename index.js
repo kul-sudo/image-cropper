@@ -1,5 +1,3 @@
-// MAXIM EDITION
-
 import express from 'express'
 import sharp from 'sharp'
 import got from 'got'
