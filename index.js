@@ -1,7 +1,7 @@
 import express from 'express'
 import sharp from 'sharp'
 import got from 'got'
-import { resolve } from 'path'
+import { join, resolve } from 'path'
 
 const PORT = 3000
 const dirname = resolve()
@@ -15,7 +15,7 @@ app.listen(PORT, () => {
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: path.join(dirname, 'public') })
+  res.sendFile('index.html', { root: join(dirname, 'public') })
 })
 
 app.get("/:width/:height/:url(*)", async (req, res) => {
