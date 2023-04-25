@@ -6,6 +6,14 @@ const PORT = 3000
 
 const app = express()
 
+app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}`)
+})
+
+app.get('/', (req, res) => {
+  res.send('<h1>Hello!</h1>')
+})
+
 app.get("/:width/:height/:url(*)", async (req, res) => {
   try {
     const { width, height, url } = req.params
@@ -23,6 +31,3 @@ app.get("/:width/:height/:url(*)", async (req, res) => {
   }
 })
 
-app.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}`)
-})
