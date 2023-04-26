@@ -1,26 +1,14 @@
 import express from 'express'
 import sharp from 'sharp'
 import got from 'got'
-import { join, resolve } from 'path'
 
 const PORT = 3000
-const dirname = resolve()
 
 const app = express()
 
-app.listen(PORT, () => {
-  console.log(`Server listening at http://localhost:${PORT}`)
-})
-
-app.use(express.static('public'))
-
-app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: join(dirname, 'public') })
-})
-
-app.get("/:width/:height/:url(*)", async (req, res) => {
+app.get('/', async (req, res) => {
   try {
-    const { width, height, url } = req.params
+    const { width, height, url } = req.query
 
     const imageBuffer = await got(url).buffer()
 
@@ -35,3 +23,6 @@ app.get("/:width/:height/:url(*)", async (req, res) => {
   }
 })
 
+app.listen(PORT, () => {
+  console.log(`Server listening at http://localhost:${PORT}`)
+})
