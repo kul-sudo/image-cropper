@@ -13,7 +13,7 @@ app.get('/', async (req, res) => {
     const imageBuffer = await got(url).buffer()
 
     const resizedImage = await sharp(imageBuffer)
-      .resize(Number(width) || null, Number(height) || null)
+      .resize({ width: Number(width) || null, height: Number(height) || null, fit: 'contain' })
       .toBuffer()
 
     res.end(resizedImage)
